@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Serviço · Encanto Pet</title>
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+  <!-- Fonte, estilo (CSS) e JavaScript -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js"></script>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="../pagina-principal.html">
+      <img src="../assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+      Encanto <b>Pet</b>
+    </a>
+    <div class="acoes-topo">
+      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+    </div>
+  </header>
+
+  <!-- Barra de Progresso -->
+  <div class="conteiner-etapas">
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">👤</div>
+      <span class="texto-etapa">Seus dados</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">🐶</div>
+      <span class="texto-etapa">Dados do pet</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item ativa">
+      <div class="icone-etapa">✂️</div>
+      <span class="texto-etapa">Serviço</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item">
+      <div class="icone-etapa">📅</div>
+      <span class="texto-etapa">Dia e horário</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item">
+      <div class="icone-etapa">✅</div>
+      <span class="texto-etapa">Confirmação</span>
+    </div>
+  </div>
+
+  <main class="conteudo">
+
+    <form class="formulario" data-proxima="agendamento.html">
+      <h2 class="titulo">Serviço</h2>
+      <p class="subtitulo">Etapa 3 de 5 · escolha um ou mais</p>
+
+      <div class="lista-servicos">
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Banho e tosa">
+          <span class="icone">✂️</span>
+          <span>Banho e tosa</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Banho">
+          <span class="icone">🛁</span>
+          <span>Banho</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Somente tosa">
+          <span class="icone">✂️</span>
+          <span>Somente tosa</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Tosa higiênica">
+          <span class="icone">🧼</span>
+          <span>Tosa higiênica</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Hidratação">
+          <span class="icone">💧</span>
+          <span>Hidratação</span>
+        </label>
+
+        <label class="opcao">
+          <input type="checkbox" name="servicos" value="Corte de unhas">
+          <span class="icone">💅</span>
+          <span>Corte de unhas</span>
+        </label>
+
+      </div>
+
+      <p class="aviso" hidden></p>
+
+      <div class="botoes">
+        <a class="botao voltar" href="dados-pet.html">Voltar</a>
+        <button class="botao continuar" type="submit">Continuar</button>
+      </div>
+    </form>
+
+  </main>
+
+</body>
+</html>

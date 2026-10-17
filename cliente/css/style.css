@@ -1,0 +1,681 @@
+/* =====================================================
+   ENCANTO PET -- CSS GLOBAL (CSS do cliente)
+===================================================== */
+
+   /* 1. CONFIGURAÇÕES GERAIS */
+
+
+/* Cores principais do site (roxo e laranja)*/
+:root {
+  --roxo: #6d28d9;
+  --roxo-claro: #8b5cf6;
+  --laranja: #f28a2e;
+  --fundo: #f8f6fd;
+  --cartao: #ffffff;
+  --campo: #ffffff;
+  --texto: #14142b;
+  --texto-suave: #5a5a78;
+  --borda: #e3e3f2;
+  --faixa: #ede7fb;
+  --sombra: 0 10px 30px rgba(60, 20, 120, 0.1);
+  color-scheme: light;
+}
+
+/* Modo escuro: o Js vai coloca data-tema="escuro" no <html>
+   (sozinho, se o sistema da pessoa estiver escuro, ou pelo botão 🌓) */
+:root[data-tema="escuro"] {
+  --fundo: #120d24;
+  --cartao: #1e1636;
+  --campo: #181030;
+  --texto: #f1f1ff;
+  --texto-suave: #b9b0d8;
+  --borda: #33285c;
+  --faixa: #2d2158;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+/* Cursor de patinha na página inteira (html + body cobrem a tela toda) */
+html,
+body {
+  cursor: url("../assets/icons/patinha.svg") 8 4, auto;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: Nunito, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Cursor de interação (patinha com coração-setinha) em tudo que clica */
+a,
+button,
+label,
+summary,
+select,
+input[type="checkbox"],
+input[type="radio"],
+input[type="date"] {
+  cursor: url("../assets/icons/seta.svg") 3 3, pointer;
+}
+
+/* Nos campos de texto o cursor continua o de digitar */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+textarea {
+  cursor: text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 { font-size: 30px; margin-bottom: 4px; }
+
+section { padding-top: 56px; }
+
+/* Foco do teclado visível */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--laranja);
+  outline-offset: 3px;
+}
+
+/* Quem prefere menos movimento não vê animações */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+
+/* =====================================================
+   2. COMPONENTES COMPARTILHADOS
+   ===================================================== */
+
+/* ----- Topo (logo + menu) ----- */
+/* A barra do topo tem sempre a mesma cor escura (não muda no modo claro) */
+header {
+  display: flex;
+  align-items: center;
+  padding: 14px 40px;
+  background: #1b1233;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 900;
+}
+.logo img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+}
+.logo b { color: var(--laranja); }
+
+/* A logo fica no canto esquerdo e empurra o resto para a direita */
+header .logo { margin-right: auto; }
+
+/* Links do menu (Serviços / Como funciona): afastados do botão de Login */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-right: 56px;
+}
+nav a {
+  padding-bottom: 4px;
+  border-bottom: 3px solid transparent;   /* linha laranja só aparece no hover */
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+}
+nav a:hover {
+  border-bottom-color: var(--laranja);
+  color: #ffffff;
+}
+
+/* Login + botão 🌓 no canto superior direito */
+.acoes-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ----- Botão "Login" do menu ----- */
+.acoes-topo .botao-login {
+  padding: 10px 22px;
+  border-radius: 14px;
+  background: var(--laranja);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* ----- Botão 🌓 (troca entre modo claro e escuro) ----- */
+.botao-tema {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  background: var(--cartao);
+  font-size: 18px;
+  line-height: 38px;
+  text-align: center;
+}
+
+/* Na barra escura, o botão 🌓 fica transparente */
+.acoes-topo .botao-tema {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ----- Botão "Entrar com Google" ----- */
+.botao-google {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  background: #ffffff;
+  color: #3c4043;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.botao-google::before {
+  content: "G  ";
+  color: #4285f4;
+  font-weight: 900;
+}
+
+/* Animação ao passar o mouse nos botões */
+.botao-google,
+.botao,
+.acoes-topo .botao-login,
+.botao-tema {
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+.botao-google:hover,
+.botao:hover,
+.acoes-topo .botao-login:hover,
+.botao-tema:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* ----- Botões Voltar / Continuar dos formulários ----- */
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.botao {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 0;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: center;
+}
+.botao.voltar { background: var(--faixa); color: var(--texto); }
+.botao.continuar { background: var(--laranja); color: #ffffff; }
+
+/* ----- Barra de progresso (etapas) ----- */
+.conteiner-etapas {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 800px;
+  margin: 24px auto 32px;
+  padding: 0 20px;
+}
+
+.etapa-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+
+.icone-etapa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  border: 2px solid var(--borda);
+  border-radius: 50%;
+  background: var(--cartao);
+  font-size: 1.4rem;
+}
+
+.texto-etapa {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.etapa-item.ativa .icone-etapa { background: var(--laranja); border-color: var(--laranja); }
+.etapa-item.ativa .texto-etapa { color: var(--texto); }
+.etapa-item.concluida .icone-etapa { background: var(--roxo); border-color: var(--roxo); }
+
+.linha-conectora {
+  flex: 1;
+  height: 2px;
+  margin: 27px 8px 0;   /* alinha a linha com o centro dos círculos */
+  background: var(--borda);
+}
+
+/* ----- Cartão do formulário ----- */
+.conteudo { padding: 0 20px 48px; }
+
+.formulario {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid var(--borda);
+  border-radius: 28px;
+  background: var(--cartao);
+  box-shadow: var(--sombra);
+}
+
+.titulo { margin: 0; font-size: 32px; }
+.subtitulo { margin: 4px 0 8px; color: var(--texto-suave); font-size: 18px; }
+
+/* ----- Campos ----- */
+.label {
+  display: block;
+  margin: 22px 0 8px;
+  font-weight: 800;
+}
+
+.campo {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 18px;
+  border: 2px solid var(--borda);
+  border-radius: 16px;
+  background: var(--campo);
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 17px;
+}
+textarea.campo { min-height: 100px; resize: vertical; }
+.campo:hover { border-color: var(--roxo-claro); }
+.campo:focus {
+  outline: 3px solid rgba(139, 92, 246, 0.35);
+  border-color: var(--roxo);
+}
+
+/* ----- Mensagem de aviso (erro) ----- */
+.aviso {
+  margin: 16px 0 0;
+  color: #d93025;
+  font-weight: 700;
+}
+
+/* ----- Rodapé ----- */
+footer {
+  margin-top: 56px;
+  padding: 24px 40px 32px;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-suave);
+  font-size: 14px;
+  text-align: center;
+}
+footer a { margin: 0 10px; }
+
+@media (max-width: 720px) {
+  header { padding: 12px 20px; }
+  nav { display: none; }
+
+  .formulario { padding: 28px 22px; }
+  .titulo { font-size: 28px; }
+
+  /* Etapas: no celular só a etapa atual mostra o nome */
+  .icone-etapa { width: 42px; height: 42px; font-size: 1.1rem; }
+  .etapa-item { min-width: 44px; }
+  .etapa-item .texto-etapa { display: none; }
+  .etapa-item.ativa .texto-etapa { display: block; }
+  .linha-conectora { margin: 20px 4px 0; }
+}
+
+
+/* =====================================================
+   3. PÁGINA PRINCIPAL
+   ===================================================== */
+
+/* Seções da página principal ocupam a tela toda, com uma margem nos cantos */
+body > section { padding-left: 40px; padding-right: 40px; }
+
+.destaque {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+  margin: 24px 40px 0;
+  padding: 56px 40px;
+  border-radius: 28px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #5b21b6, var(--roxo-claro));
+}
+
+/* Patinhas decorativas ao fundo (o "tchan" de pet shop) */
+.destaque::before,
+.destaque::after {
+  content: "🐾";
+  position: absolute;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.destaque::before { top: 18px; right: 30%; font-size: 70px; transform: rotate(20deg); }
+.destaque::after { bottom: 10px; left: 38%; font-size: 90px; transform: rotate(-15deg); }
+
+.destaque-texto,
+.destaque-imagem { position: relative; z-index: 1; }
+
+.etiqueta {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.destaque h1 { margin: 16px 0; font-size: 46px; line-height: 1.1; }
+.destaque h1 b { color: #ffb066; }
+
+.destaque-imagem { text-align: center; }
+.destaque-imagem img {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Título das seções com um tracinho laranja */
+#servicos h2::after,
+#como-funciona h2::after,
+.faixa h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 4px;
+  background: var(--laranja);
+}
+.faixa h2::after { margin: 6px auto 16px; }
+
+/* Cartões (serviços e como funciona) */
+.cartoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cartao {
+  padding: 22px;
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  background: var(--cartao);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cartao:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+.cartao h3 { margin: 8px 0 4px; }
+.cartao p { margin: 0; color: var(--texto-suave); }
+
+.icone { font-size: 30px; }
+
+
+.numero {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--laranja);
+  color: #ffffff;
+  font-weight: 900;
+  line-height: 34px;
+  text-align: center;
+}
+
+/* Faixa "Pronto para começar?" */
+.faixa {
+  margin: 56px 40px 0;
+  padding: 36px;
+  border-radius: 24px;
+  background: var(--faixa);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  body > section { padding-left: 20px; padding-right: 20px; }
+  .destaque { grid-template-columns: 1fr; margin: 16px 20px 0; padding: 36px 24px; }
+  .faixa { margin: 40px 20px 0; }
+  footer { padding-left: 20px; padding-right: 20px; }
+  .destaque-imagem { display: none; }
+  .destaque h1 { font-size: 34px; }
+}
+
+
+/* =====================================================
+   4. LOGIN
+   ===================================================== */
+
+.login {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Painel da esquerda: roxo com a logo */
+.login-esquerdo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #5b21b6, var(--roxo-claro));
+  color: #ffffff;
+  text-align: center;
+}
+.login-esquerdo img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.login-esquerdo h1 { margin: 20px 0 8px; font-size: 48px; line-height: 1.1; }
+.login-esquerdo h1 b { color: #ffb066; }
+.login-esquerdo p { margin: 0; font-size: 20px; font-weight: 700; }
+
+/* Painel da direita: entrada */
+.login-direito {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 10%;
+}
+.login-topo {
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  right: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login-topo a { color: var(--texto-suave); font-weight: 700; }
+
+.login-direito h2 { margin: 0 0 8px; font-size: 34px; }
+.login-direito > p { margin: 0 0 28px; color: var(--texto-suave); font-size: 18px; }
+
+.login-direito .botao-google { align-self: flex-start; font-size: 18px; padding: 14px 32px; }
+.login-direito .login-dica { margin-top: 16px; color: var(--texto-suave); font-size: 15px; }
+
+/* Acesso do administrador (abre e fecha sem JavaScript) */
+.adm {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--borda);
+}
+.adm summary { font-weight: 800; color: var(--roxo); }
+:root[data-tema="escuro"] .adm summary { color: #d4c4ff; }
+.adm .botao { margin-top: 20px; }
+
+@media (max-width: 900px) {
+  .login { flex-direction: column; }
+  .login-esquerdo { flex: none; padding: 32px 20px; }
+  .login-esquerdo img { width: 110px; height: 110px; }
+  .login-esquerdo h1 { font-size: 34px; }
+  .login-direito { padding: 80px 24px 40px; }
+  .login-topo { left: 24px; right: 24px; }
+}
+
+
+/* =====================================================
+   5. DADOS PESSOAIS
+   (usa os componentes compartilhados: etapas, formulário e campos)
+   ===================================================== */
+
+.icone-campo { margin-right: 6px; }
+
+
+/* =====================================================
+   6. DADOS DO PET
+   (usa os componentes compartilhados: etapas, formulário e campos)
+   ===================================================== */
+
+select.campo { background: var(--campo); }
+
+
+/* =====================================================
+   7. SERVIÇOS
+   ===================================================== */
+
+.lista-servicos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 26px;
+  border: 3px solid var(--borda);
+  border-radius: 28px;
+  background: var(--campo);
+  color: var(--texto-suave);
+  font-size: 20px;
+  font-weight: 800;
+  transition: 0.2s;
+}
+/* A caixinha fica escondida (mas continua funcionando pelo teclado) */
+.opcao input,
+.horario input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.opcao .icone { font-size: 26px; }
+.opcao:hover { border-color: var(--laranja); }
+.opcao:has(input:checked) {
+  border-color: var(--roxo);
+  background: var(--faixa);
+  color: var(--texto);
+}
+.opcao:has(input:focus-visible) { outline: 3px solid var(--laranja); }
+
+
+/* =====================================================
+   8. AGENDAMENTO
+   ===================================================== */
+
+.lista-horarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+}
+
+.horario { position: relative; }
+.horario span {
+  display: block;
+  padding: 12px;
+  border: 2px solid var(--borda);
+  border-radius: 14px;
+  background: var(--campo);
+  color: var(--texto-suave);
+  font-weight: 800;
+  text-align: center;
+  transition: 0.2s;
+}
+.horario:hover span { border-color: var(--laranja); }
+.horario input:checked + span {
+  border-color: var(--roxo);
+  background: var(--roxo);
+  color: #ffffff;
+}
+.horario input:focus-visible + span { outline: 3px solid var(--laranja); }
+
+
+/* =====================================================
+   9. CONFIRMAÇÃO
+   ===================================================== */
+
+.confirmacao-topo { text-align: center; }
+.confirmacao-topo .selo { font-size: 64px; line-height: 1.2; }
+.confirmacao-topo .titulo { font-size: 30px; }
+
+.resumo { margin: 24px 0 0; }
+.resumo div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borda);
+}
+.resumo dt { color: var(--texto-suave); font-weight: 700; }
+.resumo dd { margin: 0; font-weight: 800; text-align: right; }
+
+.botoes.centro { justify-content: center; flex-wrap: wrap; }
+
+/* 
+Murilo Trujillo
+Estéfany Almeida
+Paola Oliveira 
+*/

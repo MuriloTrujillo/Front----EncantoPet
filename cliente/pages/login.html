@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login · Encanto Pet</title>
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+  <!-- Fonte, estilo (CSS) e JavaScript -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js"></script>
+</head>
+<body>
+
+  <main class="login">
+
+    <!-- Lado esquerdo -->
+    <section class="login-esquerdo">
+      <img src="../assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+      <h1>Encanto <b>Pet!</b></h1>
+      <p>Cuidado e carinho para seu pet</p>
+    </section>
+
+    <!-- lado da direita (entrada) -->
+    <section class="login-direito">
+      <div class="login-topo">
+        <a href="../pagina-principal.html">← Voltar ao início</a>
+        <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+      </div>
+
+      <h2>Bem-vindo ao Encanto Pet!</h2>
+      <p>Entre na sua conta para continuar</p>
+
+      <!-- Cliente: faz acesso com a conta do Google dele -->
+      <a class="botao-google" href="dados-pessoais.html">Entrar com Google</a>
+      <p class="login-dica">Primeiro acesso? É só entrar com o Google, sua conta é criada na hora.</p>
+
+      <!-- Adm: e-mail e senha -->
+      <details class="adm">
+        <summary>Acesso do administrador</summary>
+        <form data-aviso="O painel do administrador ainda está em desenvolvimento.">
+          <label class="label" for="adm-email">E-mail</label>
+          <input class="campo" type="email" id="adm-email" placeholder="email.exemplo@gmail.com" required>
+
+          <label class="label" for="adm-senha">Senha</label>
+          <input class="campo" type="password" id="adm-senha" placeholder="Digite sua senha" required>
+
+          <button class="botao continuar" type="submit">Entrar como ADM</button>
+          <p class="aviso" hidden></p>
+        </form>
+      </details>
+    </section>
+
+  </main>
+
+</body>
+</html>

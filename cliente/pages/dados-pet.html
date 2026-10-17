@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dados do pet · Encanto Pet</title>
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+  <!-- Fonte, estilo (CSS) e JavaScript -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js"></script>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="../pagina-principal.html">
+      <img src="../assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+      Encanto <b>Pet</b>
+    </a>
+    <div class="acoes-topo">
+      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+    </div>
+  </header>
+
+  <!-- Barra de Progresso -->
+  <div class="conteiner-etapas">
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">👤</div>
+      <span class="texto-etapa">Seus dados</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item ativa">
+      <div class="icone-etapa">🐶</div>
+      <span class="texto-etapa">Dados do pet</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item">
+      <div class="icone-etapa">✂️</div>
+      <span class="texto-etapa">Serviço</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item">
+      <div class="icone-etapa">📅</div>
+      <span class="texto-etapa">Dia e horário</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item">
+      <div class="icone-etapa">✅</div>
+      <span class="texto-etapa">Confirmação</span>
+    </div>
+  </div>
+
+  <main class="conteudo">
+
+    <form class="formulario" data-proxima="servicos.html">
+      <h2 class="titulo">Dados do pet</h2>
+      <p class="subtitulo">Etapa 2 de 5</p>
+
+      <label class="label" for="pet-nome">Nome do pet</label>
+      <input class="campo" type="text" id="pet-nome" name="pet-nome" placeholder="Ex.: Thor" required>
+
+      <label class="label" for="pet-idade">Idade</label>
+      <input class="campo" type="text" id="pet-idade" name="pet-idade" placeholder="Ex.: 3 anos" required>
+
+      <label class="label" for="pet-temperamento">Temperamento</label>
+      <select class="campo" id="pet-temperamento" name="pet-temperamento" required>
+        <option>Calmo</option>
+        <option>Brincalhão</option>
+        <option>Agitado</option>
+        <option>Tímido</option>
+        <option>Sociável</option>
+        <option>Protetor</option>
+      </select>
+
+      <label class="label" for="pet-raca">Raça</label>
+      <input class="campo" type="text" id="pet-raca" name="pet-raca" placeholder="Ex.: Poodle" required>
+
+      <div class="botoes">
+        <a class="botao voltar" href="dados-pessoais.html">Voltar</a>
+        <button class="botao continuar" type="submit">Continuar</button>
+      </div>
+    </form>
+
+  </main>
+
+</body>
+</html>

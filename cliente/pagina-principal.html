@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Encanto Pet</title>
-  <link rel="icon" href="assets/logo.png">
+  <title>Encanto Pet · Cuidado e carinho para o seu pet</title>
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+  <!-- Fonte, estilo (CSS) e JavaScript -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
 </head>
 <body>
 
-  <!-- Botão 🌓 -- troca de tema -->
-  <input type="checkbox" id="tema">
-
+  <!-- logo, menu, botão de login e botão 🌓 (troca de tema) -->
   <header>
     <div class="logo">
-      <img src="assets/logo.png" alt="Logo do Encanto Pet">
+      <img src="assets/images/logo.jpeg" alt="Logo do Encanto Pet">
       Encanto <b>Pet</b>
     </div>
     <nav>
       <a href="#servicos">Serviços</a>
       <a href="#como-funciona">Como funciona</a>
-      <a class="botao-login" href="login.html">Login</a>
-      <label class="botao-tema" for="tema" title="Trocar entre modo claro e escuro">🌓</label>
     </nav>
+    <div class="acoes-topo">
+      <a class="botao-login" href="pages/login.html">Login</a>
+      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+    </div>
   </header>
 
   <!-- Destaque da pag, botão para entrar > ir para tela de login... 🙃 -->
@@ -33,14 +39,14 @@
       <p class="etiqueta">🐾 Cuidado e carinho para o seu pet</p>
       <h1>Agende o melhor para o seu <b>melhor amigo</b></h1>
       <p>Banho, tosa, consultas e muito mais, marcados em poucos cliques.</p>
-      <a class="botao-google" href="login.html">Entrar com Google</a>
+      <a class="botao-google" href="pages/login.html">Entrar com Google</a>
     </div>
     <div class="destaque-imagem">
-      <img src="assets/logo.png" alt="Logo do Encanto Pet">
+      <img src="assets/images/logo.jpeg" alt="Logo do Encanto Pet">
     </div>
   </section>
 
-  <!-- Nossos Serviços para agendar -->
+  <!-- Serviços -->
 
   <section id="servicos">
     <h2>Nossos serviços</h2>
@@ -93,10 +99,9 @@
 
   <section class="faixa">
     <h2>Pronto para começar?</h2>
-    <a class="botao-google" href="login.html">Entrar com Google</a>
+    <a class="botao-google" href="pages/login.html">Entrar com Google</a>
   </section>
 
-  <!-- Rodapé 🙃 -->
 
   <footer>
     <p>🐾 © 2026 Encanto Pet. Todos os direitos reservados.</p>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmação · Encanto Pet</title>
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+
+  <!-- Fonte, estilo (CSS) e JavaScript -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js"></script>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="../pagina-principal.html">
+      <img src="../assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+      Encanto <b>Pet</b>
+    </a>
+    <div class="acoes-topo">
+      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+    </div>
+  </header>
+
+  <!-- Barra de Progresso -->
+  <div class="conteiner-etapas">
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">👤</div>
+      <span class="texto-etapa">Seus dados</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">🐶</div>
+      <span class="texto-etapa">Dados do pet</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">✂️</div>
+      <span class="texto-etapa">Serviço</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item concluida">
+      <div class="icone-etapa">📅</div>
+      <span class="texto-etapa">Dia e horário</span>
+    </div>
+    <div class="linha-conectora"></div>
+    <div class="etapa-item ativa">
+      <div class="icone-etapa">✅</div>
+      <span class="texto-etapa">Confirmação</span>
+    </div>
+  </div>
+
+  <main class="conteudo">
+
+    <section class="formulario">
+      <div class="confirmacao-topo">
+        <div class="selo">🎉</div>
+        <h2 class="titulo">Agendamento confirmado!</h2>
+        <p class="subtitulo">Etapa 5 de 5 · confira o resumo abaixo</p>
+      </div>
+
+      <dl class="resumo">
+        <div><dt>Tutor</dt><dd data-resumo="nome"></dd></div>
+        <div><dt>Telefone</dt><dd data-resumo="telefone"></dd></div>
+        <div><dt>Pet</dt><dd data-resumo="pet-nome"></dd></div>
+        <div><dt>Raça</dt><dd data-resumo="pet-raca"></dd></div>
+        <div><dt>Serviços</dt><dd data-resumo="servicos"></dd></div>
+        <div><dt>Dia</dt><dd data-resumo="data"></dd></div>
+        <div><dt>Horário</dt><dd data-resumo="horario"></dd></div>
+      </dl>
+
+      <div class="botoes centro">
+        <a class="botao voltar" href="servicos.html">Agendar outro serviço</a>
+        <a class="botao continuar" href="../pagina-principal.html">Voltar ao início</a>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
