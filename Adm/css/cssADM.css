@@ -1,0 +1,292 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: Nunito, Arial, sans-serif;
+}
+header {
+    display: flex;
+    align-items: center;
+    padding: 14px 40px;
+    background: #1b1233;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.logo b {
+    color: #f28a2e;
+}
+
+.pagina {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 0;
+    background: transparent;
+    color: #14142b;
+}
+
+.cabecalho h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    color: #14142b;
+}
+
+.cabecalho p {
+    margin: 0;
+    color: #687383;
+    font-size: 15px;
+}
+
+.botao-novoServico {
+    background: #f47718;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 14px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lista-servicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.servico {
+    background: white;
+    border: 1px solid #e0e4eb;
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.parte-superior {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.icone {
+    background: #e8eeff;
+    color: #3525c9;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+.servico h2 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.servico p {
+    color: #687383;
+    font-size: 14px;
+}
+
+.acoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.editar {
+    flex: 1;
+    background: white;
+    border: 1px solid #e0e4eb;
+    border-radius: 25px;
+    padding: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.excluir {
+    background: white;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.MineBotao {
+    width: 36px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.MineBotao input {
+    display: none;
+}
+
+.MineBotao span {
+    position: absolute;
+    background: #b8bdc7;
+    width: 36px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+.MineBotao span::before {
+    content: "";
+    position: absolute;
+    background: white;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+}
+
+.MineBotao input:checked + span {
+    background: #3525c9;
+}
+
+.MineBotao input:checked + span::before {
+    left: 19px;
+}
+
+/* NOVO SERVIÇO */
+
+.NovaJanela {
+    display: none;
+    position: fixed;
+    background: #0009;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.Fundo {
+    background: white;
+    width: 450px;
+    padding: 25px;
+    border-radius: 17px;
+    position: relative;
+}
+
+.Fundo h2 {
+    margin-bottom: 8px;
+}
+
+.Fundo p {
+    color: #687383;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.Fundo input[type="text"]:hover {
+    border-color: #8b5cf6;
+}
+
+.Fundo input[type="text"]:focus {
+    outline: 3px solid rgba(139, 92, 246, 0.35);
+    border-color: #6d28d9;
+}
+
+.fechar {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background: white;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.formulario label,
+.Fundo form > label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.Fundo input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e0e4eb;
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+.campos-lado {
+    display: flex;
+    gap: 15px;
+}
+
+.campos-lado div {
+    width: 50%;
+}
+
+.disponibilidade {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e4eb;
+    border-radius: 25px;
+    padding: 14px;
+    font-size: 13px;
+}
+
+.botoes-modal {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancelar,
+.salvar {
+    padding: 13px 18px;
+    border-radius: 25px;
+    font-weight: arial;
+    cursor: pointer;
+}
+
+.cancelar {
+    background: white;
+    border: 1px solid #e0e4eb;
+}
+
+.salvar {
+    background: #f47718;
+    color: white;
+    border: none;
+}
