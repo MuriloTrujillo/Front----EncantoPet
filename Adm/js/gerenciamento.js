@@ -56,7 +56,7 @@ formulario.addEventListener("submit", function(event) {
         servicoEditando.querySelector("p").textContent =
             duracao + " · " + valor;
 
-        servicoEditando.querySelector(".interruptor input").checked =
+        servicoEditando.querySelector(".MineBotao input").checked =
             disponivel;
 
     } else {
@@ -68,7 +68,7 @@ formulario.addEventListener("submit", function(event) {
             <div class="parte-superior">
                 <div class="icone">✂</div>
 
-                <label class="interruptor">
+                <label class="MineBotao">
                     <input type="checkbox" ${disponivel ? "checked" : ""}>
                     <span></span>
                 </label>
@@ -103,3 +103,52 @@ function excluirServico(botao) {
         servico.remove();
     }
 }
+
+
+// --> Murilo
+
+(function () {
+    var GAVETA_TEMA = "encanto-tema";
+
+    // se o navegador não guardar, o tema só vale até fechar a página
+    function pegarTema() {
+        try {
+            return localStorage.getItem(GAVETA_TEMA);
+        } catch (erro) {
+            return null;
+        }
+    }
+
+    function guardarTema(tema) {
+        try {
+            localStorage.setItem(GAVETA_TEMA, tema);
+        } catch (erro) {}
+    }
+
+    // coloca o tema lá no <html>
+    function aplicarTema(tema) {
+        document.documentElement.setAttribute("data-tema", tema);
+    }
+
+    // usa o tema que a pessoa escolheu; se nunca escolheu, usa o do sistema que a pessoa utiliza no seu aparelho
+    var sistemaEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    aplicarTema(pegarTema() || (sistemaEscuro ? "escuro" : "claro"));
+
+    // o botão 🌓 troca entre claro e escuro
+    document.addEventListener("DOMContentLoaded", function () {
+        var botao = document.querySelector("[data-botao-tema]");
+
+        if (!botao) {
+            return;
+        }
+
+        botao.addEventListener("click", function () {
+            var atual = document.documentElement.getAttribute("data-tema");
+            var novo = atual === "escuro" ? "claro" : "escuro";
+
+            aplicarTema(novo);
+            guardarTema(novo);
+        });
+    });
+})();
+

@@ -290,3 +290,324 @@ header {
     color: white;
     border: none;
 }
+
+
+/* ===========================================================================
+   --------------------- BLOCO FEITO PELO MURILO (início) --------------------
+   Deixa a tela de serviços do ADM com o mesmo estilo das páginas do cliente:
+   tema claro/escuro, cores do site e animações.
+   Nada acima foi apagado: aqui só sobrescrevemos o que já existia.
+   =========================================================================== */
+
+/* Cores: mesmos nomes de variáveis do style.css do cliente */
+:root {
+    --roxo: #6d28d9;
+    --roxo-claro: #8b5cf6;
+    --laranja: #f28a2e;
+    --fundo: #f8f6fd;
+    --cartao: #ffffff;
+    --campo: #ffffff;
+    --texto: #14142b;
+    --texto-suave: #5a5a78;
+    --borda: #e3e3f2;
+    --faixa: #ede7fb;
+    --sombra: 0 10px 30px rgba(60, 20, 120, 0.1);
+    color-scheme: light;
+}
+
+/* Modo escuro: o JS coloca data-tema="escuro" no <html> */
+:root[data-tema="escuro"] {
+    --fundo: #120d24;
+    --cartao: #1e1636;
+    --campo: #181030;
+    --texto: #f1f1ff;
+    --texto-suave: #b9b0d8;
+    --borda: #33285c;
+    --faixa: #2d2158;
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+}
+
+/* Base da página (cursor de patinha igual ao do cliente) */
+html,
+body {
+    cursor: url("../../cliente/assets/icons/patinha.svg") 8 4, auto;
+}
+
+body {
+    background: var(--fundo);
+    color: var(--texto);
+    line-height: 1.5;
+    transition: background 0.2s, color 0.2s;
+}
+
+a,
+button,
+label,
+input[type="checkbox"] {
+    cursor: url("../../cliente/assets/icons/seta.svg") 3 3, pointer;
+}
+
+input[type="text"] {
+    cursor: text;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button:focus-visible {
+    outline: 3px solid var(--laranja);
+    outline-offset: 3px;
+}
+
+/* Barra do topo (só a de cima, não o cabeçalho da página) */
+body > header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.logo img {
+    background: #ffffff;
+}
+
+.logo b {
+    color: var(--laranja);
+}
+
+/* Botão 🌓: fica por cima do canto direito da barra */
+body > .acoes-topo {
+    position: absolute;
+    top: 17px;
+    right: 40px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.botao-tema {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 38px;
+    text-align: center;
+}
+
+/* Botão de texto da barra (Sair / ← Painel), igual ao estilo do botão 🌓 */
+.botao-topo {
+    padding: 9px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 14px;
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.botao-topo:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Textos */
+.cabecalho,
+.cabecalho h1 {
+    color: var(--texto);
+}
+
+.cabecalho p,
+.servico p,
+.Fundo p {
+    color: var(--texto-suave);
+}
+
+/* Botões laranja e animação ao passar o mouse (igual ao cliente) */
+.botao-novoServico,
+.salvar {
+    background: var(--laranja);
+}
+
+.botao-novoServico,
+.salvar,
+.cancelar,
+.botao-tema {
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.botao-novoServico:hover,
+.salvar:hover,
+.cancelar:hover,
+.botao-tema:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Cards dos serviços */
+.servico {
+    background: var(--cartao);
+    border-color: var(--borda);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    animation: adm-surgir 0.5s ease backwards;   /* entrada ao abrir a página */
+}
+
+.servico:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra);
+    border-color: var(--roxo-claro);
+}
+
+/* Os cards entram um depois do outro */
+.servico:nth-child(2) { animation-delay: 0.06s; }
+.servico:nth-child(3) { animation-delay: 0.12s; }
+.servico:nth-child(4) { animation-delay: 0.18s; }
+.servico:nth-child(5) { animation-delay: 0.24s; }
+.servico:nth-child(n+6) { animation-delay: 0.3s; }
+
+.icone {
+    background: var(--faixa);
+    color: var(--roxo);
+    transition: transform 0.2s;
+}
+
+:root[data-tema="escuro"] .icone {
+    color: var(--roxo-claro);
+}
+
+.servico:hover .icone {
+    transform: rotate(-12deg) scale(1.1);
+}
+
+.editar {
+    background: var(--cartao);
+    color: var(--texto);
+    border-color: var(--borda);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.editar:hover {
+    border-color: var(--laranja);
+    transform: translateY(-2px);
+}
+
+.excluir {
+    background: transparent;
+    transition: transform 0.2s;
+}
+
+.excluir:hover {
+    transform: scale(1.25);
+}
+
+/* Interruptor (ativo / inativo) */
+.MineBotao span,
+.MineBotao span::before {
+    transition: background 0.25s, left 0.25s;
+}
+
+.MineBotao input:checked + span {
+    background: var(--roxo);
+}
+
+/* Janela de novo serviço / editar serviço */
+
+/* Os rótulos Duração e Valor ficam iguais ao de Nome do serviço */
+.campos-lado label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.NovaJanela {
+    z-index: 10;
+    animation: adm-fade 0.2s ease;
+}
+
+.Fundo {
+    background: var(--cartao);
+    color: var(--texto);
+    box-shadow: var(--sombra);
+    max-width: calc(100% - 30px);
+    animation: adm-pop 0.25s ease;
+}
+
+.fechar {
+    background: transparent;
+    color: var(--texto);
+    transition: transform 0.2s;
+}
+
+.fechar:hover {
+    transform: rotate(90deg);
+}
+
+.Fundo input[type="text"] {
+    background: var(--campo);
+    color: var(--texto);
+    border-color: var(--borda);
+    transition: border-color 0.2s;
+}
+
+.Fundo input[type="text"]::placeholder {
+    color: var(--texto-suave);
+    opacity: 0.7;
+}
+
+.disponibilidade {
+    border-color: var(--borda);
+}
+
+.cancelar {
+    background: var(--cartao);
+    color: var(--texto);
+    border-color: var(--borda);
+}
+
+/* Animações */
+@keyframes adm-surgir {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes adm-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes adm-pop {
+    from { opacity: 0; transform: scale(0.94) translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Quem prefere menos movimento não vê animações (igual ao cliente) */
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
+
+/* Celular */
+@media (max-width: 720px) {
+    body > header {
+        padding: 14px 16px;
+    }
+
+    body > .acoes-topo {
+        right: 16px;
+    }
+
+    .lista-servicos {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+/* --------------------- BLOCO FEITO PELO MURILO (fim) -------------------- */

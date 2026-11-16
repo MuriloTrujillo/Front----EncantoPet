@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda · Encanto Pet</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/cssADM.css">
+  <link rel="stylesheet" href="../css/painel.css">
+  <link rel="stylesheet" href="../css/agenda.css">
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="painel.html">
+      <img src="../../cliente/assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+      Encanto <b>Pet</b>
+    </a>
+    <div class="acoes-topo">
+      <a class="botao-topo" href="painel.html">← Painel</a>
+      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+    </div>
+  </header>
+
+  <main class="pagina">
+
+    <header class="cabecalho">
+      <div>
+        <h1>Agenda</h1>
+        <p>Veja os horários marcados e navegue por semana, mês ou ano.</p>
+      </div>
+    </header>
+
+    <!-- Dia ATUAL -->
+    <section class="hoje-card" aria-labelledby="hoje-titulo">
+      <div class="hoje-data">
+        <span class="hoje-dia" id="hoje-dia"></span>
+        <span class="hoje-sem" id="hoje-sem"></span>
+        <span class="hoje-mes" id="hoje-mes"></span>
+        <p class="hoje-resumo" id="hoje-resumo"></p>
+      </div>
+      <div class="hoje-corpo">
+        <h2 id="hoje-titulo">O que tem para hoje</h2>
+        <ul class="hoje-lista" id="hoje-lista"></ul>
+      </div>
+    </section>
+
+    <!-- Calendário -->
+    <section class="calendario" aria-label="Calendário">
+      <div class="cal-topo">
+        <div class="cal-nav">
+          <button type="button" id="cal-anterior" aria-label="Anterior">‹</button>
+          <button type="button" id="cal-hoje" class="cal-hoje">Hoje</button>
+          <button type="button" id="cal-proximo" aria-label="Próximo">›</button>
+        </div>
+
+        <h2 id="cal-titulo" aria-live="polite"></h2>
+
+        <div class="cal-vistas" role="group" aria-label="Tipo de visualização">
+          <button type="button" data-vista="semana">Semana</button>
+          <button type="button" data-vista="mes">Mês</button>
+          <button type="button" data-vista="ano">Ano</button>
+        </div>
+      </div>
+
+      <div id="cal-corpo"></div>
+
+      <div class="cal-detalhe" id="cal-detalhe" hidden></div>
+    </section>
+
+    <p class="nota">Agendamentos de exemplo. Depois eles serão ligados ao sistema de agendamento.</p>
+
+  </main>
+
+  <script src="../js/painel.js"></script>
+  <script src="../js/agenda.js"></script>
+
+</body>
+</html>
