@@ -671,6 +671,27 @@ select.campo { background: var(--campo); }
 }
 .resumo dt { color: var(--texto-suave); font-weight: 700; }
 .resumo dd { margin: 0; font-weight: 800; text-align: right; }
+/* observação: respeita o enter que o cliente digitou e quebra texto */
+.resumo dd[data-resumo="observacoes"] { white-space: pre-line; overflow-wrap: anywhere; }
+
+/* observação grande: o texto vai para um cardzinho embaixo do título */
+.resumo div.observacao-grande { flex-direction: column; gap: 10px; }
+.resumo div.observacao-grande dd {
+  padding: 14px 16px;
+  background: var(--campo);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--laranja);
+  border-radius: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  animation: abrir-card 0.25s ease;
+}
+
+@keyframes abrir-card {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
 
 .botoes.centro { justify-content: center; flex-wrap: wrap; }
 
