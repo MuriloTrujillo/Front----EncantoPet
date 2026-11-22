@@ -1,99 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do administrador · Encanto Pet</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do administrador · Encanto Pet</title>
+    <script type="module" src="../../cliente/js/script.js"></script>
+    <script type="module" src="../../cliente/js/api.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/cssADM.css">
-  <link rel="stylesheet" href="../css/painel.css">
-</head>
-<body>
-
-  <header>
-    <a class="logo" href="painel.html">
-      <img src="../../cliente/assets/images/logo.jpeg" alt="Logo do Encanto Pet">
-      Encanto <b>Pet</b>
-    </a>
-    <div class="acoes-topo">
-      <a class="botao-topo" href="../../cliente/pages/login.html">Sair</a>
-      <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
-    </div>
-  </header>
-
-  <main class="pagina">
-
-    <header class="cabecalho">
-      <div>
-        <h1>Painel do administrador</h1>
-        <p id="data-hoje">Resumo do seu pet shop.</p>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/cssADM.css" />
+    <link rel="stylesheet" href="../css/painel.css" />
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="painel.html">
+        <img
+          src="../../cliente/assets/images/logo.jpeg"
+          alt="Logo do Encanto Pet"
+        />
+        Encanto <b>Pet</b>
+      </a>
+      <div class="acoes-topo">
+        <a class="botao-topo" href="../../cliente/pages/login.html">Sair</a>
+        <button
+          type="button"
+          class="botao-tema"
+          data-botao-tema
+          title="Trocar entre modo claro e escuro"
+          aria-label="Trocar entre modo claro e escuro"
+        >
+          🌓
+        </button>
       </div>
     </header>
 
-    <!-- Atalhos -->
-    <section aria-labelledby="titulo-atalhos">
-      <h2 id="titulo-atalhos">Acesso rápido</h2>
-      <div class="atalhos">
-
-        <a class="atalho" href="Servico.html">
-          <div class="icone">✂</div>
-          <h3>Serviços</h3>
-          <p>Cadastre, edite e ative os serviços que o cliente pode agendar.</p>
-        </a>
-
-        <a class="atalho" href="agenda.html">
-          <div class="icone">📅</div>
-          <h3>Agenda</h3>
-          <p>Veja e organize os horários marcados.</p>
-        </a>
-
-        <div class="atalho em-breve">
-          <div class="icone">👤</div>
-          <h3>Clientes</h3>
-          <p>Consulte tutores e os pets de cada um.</p>
-          <span class="etiqueta-breve">Em breve</span>
+    <main class="pagina">
+      <header class="cabecalho">
+        <div>
+          <h1>Painel do administrador</h1>
+          <p id="data-hoje">Resumo do seu pet shop.</p>
         </div>
+      </header>
 
-      </div>
-    </section>
+      <!-- Atalhos -->
+      <section aria-labelledby="titulo-atalhos">
+        <h2 id="titulo-atalhos">Acesso rápido</h2>
+        <div class="atalhos">
+          <a class="atalho" href="Servico.html">
+            <div class="icone">✂</div>
+            <h3>Serviços</h3>
+            <p>
+              Cadastre, edite e ative os serviços que o cliente pode agendar.
+            </p>
+          </a>
 
-    <!-- Próximos agendamentos -->
-    <section aria-labelledby="titulo-agenda">
-      <h2 id="titulo-agenda">Próximos agendamentos</h2>
-      <ul class="lista-agenda">
+          <a class="atalho" href="agenda.html">
+            <div class="icone">📅</div>
+            <h3>Agenda</h3>
+            <p>Veja e organize os horários marcados.</p>
+          </a>
 
-        <li>
-          <span class="hora">09:00</span>
-          <span class="info"><b>Thor</b> Banho e tosa · Maria Souza</span>
-          <span class="status confirmado">Confirmado</span>
-        </li>
+          <div class="atalho em-breve">
+            <div class="icone">👤</div>
+            <h3>Clientes</h3>
+            <p>Consulte tutores e os pets de cada um.</p>
+            <span class="etiqueta-breve">Em breve</span>
+          </div>
+        </div>
+      </section>
 
-        <li>
-          <span class="hora">10:30</span>
-          <span class="info"><b>Luna</b> Hidratação · João Lima</span>
-          <span class="status confirmado">Confirmado</span>
-        </li>
+      <!-- Próximos agendamentos -->
+      <section  aria-labelledby="titulo-agenda">
+        <h2 id="titulo-agenda">Próximos agendamentos</h2>
+        <ul id="next-schedule" class="lista-agenda">
+          <template id="next-schedule-adm-tamplate">
+            <li>
+              <span class="hora">09:00</span>
+              <span class="info"><b>Thor</b>Banho e tosa · Maria Souza</span>
+              <span class="status">Confirmado</span>
+            </li>
+          </template>
 
-        <li>
-          <span class="hora">13:00</span>
-          <span class="info"><b>Mel</b> Corte de unhas · Ana Costa</span>
-          <span class="status aguardando">Aguardando</span>
-        </li>
+          <!-- <li>
+            <span class="hora">09:00</span>
+            <span class="info"><b>Thor</b> Banho e tosa · Maria Souza</span>
+            <span class="status confirmado">Confirmado</span>
+          </li>
 
-        <li>
-          <span class="hora">15:00</span>
-          <span class="info"><b>Bob</b> Tosa higiênica · Carlos Dias</span>
-          <span class="status confirmado">Confirmado</span>
-        </li>
+          <li>
+            <span class="hora">10:30</span>
+            <span class="info"><b>Luna</b> Hidratação · João Lima</span>
+            <span class="status confirmado">Confirmado</span>
+          </li>
 
-      </ul>
-      <p class="nota">Dados de exemplo. Depois eles serão ligados ao sistema de agendamento.</p>
-    </section>
+          <li>
+            <span class="hora">13:00</span>
+            <span class="info"><b>Mel</b> Corte de unhas · Ana Costa</span>
+            <span class="status aguardando">Aguardando</span>
+          </li>
 
-  </main>
+          <li>
+            <span class="hora">15:00</span>
+            <span class="info"><b>Bob</b> Tosa higiênica · Carlos Dias</span>
+            <span class="status confirmado">Confirmado</span>
+          </li> -->
+        </ul>
+        <p class="nota">
+          Dados de exemplo. Depois eles serão ligados ao sistema de agendamento.
+        </p>
+      </section>
+    </main>
 
-  <script src="../js/painel.js"></script>
-
-</body>
+    <script src="../js/painel.js"></script>
+  </body>
 </html>

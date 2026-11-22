@@ -1,6 +1,6 @@
 /*  Memória  */
 
-import { createSchedule, listScheduleDay, login } from "./api.js";
+import { createSchedule, listScheduleDay, login, getAllSchedule } from "./api.js";
 
 //  os nomes (chaves) usados no localStorage e no sessionStorage, onde as informações ficam guardadas
 var GAVETA_TEMA = "encanto-tema";
@@ -136,11 +136,11 @@ function configurarFormularios() {
         const response = await login(email, password)
 
         if(response.error){
-          return mostrarAviso(formulario, response.message.split(" - ")[2])}
+          return mostrarAviso(formulario, response.message.split(" - ")[2])
+        }
         
         return window.location.href = "../../Adm/pages/painel.html"
-      
-        }
+      }
 
       // Trata os demais formularios
       var proxima = formulario.getAttribute("data-proxima");
@@ -215,7 +215,7 @@ function preencherResumo() {
   });
 }
 
-// Horarios de agendamento dinamicos
+// Dynamic data
 async function renderAvailableHours() {
   const hoursOptions = [
     "10:00",
@@ -282,6 +282,48 @@ async function renderAvailableHours() {
   });
 }
 
+function renderNextSchedules (data) {
+  const nextScheduleContainer = document.querySelector("#next-schedule")
+  const scheduleComponent = document.querySelector("#next-schedule-adm-tamplate").content
+  
+  data.forEach( schedule => {
+    const clone = scheduleComponent.cloneNode(true)
+    const date = new Date(schedule.date).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    
+    const hour = clone.querySelector(".hora")
+    const info = clone.querySelector(".info")
+    const status = clone.querySelector(".status")
+    const statusRecord = { pending: "Aguardando", confirmed: "Confirmado", completed: "Completo", canceled: "Cancelado" }
+
+    hour.textContent = date.split(",")[1].slice(0,6)
+    info.innerHTML = `
+      <b>${schedule.petId.name}</b> 
+      ${schedule.servicos.map( service => service.name).join(" | ")} · ${schedule.clientId.name}</span>
+    `
+    status.textContent = `${statusRecord[schedule.status]}`
+    status.className = `status ${statusRecord[schedule.status].toLowerCase()}`
+    nextScheduleContainer.appendChild(clone)
+  })
+  
+}
+
+async function admScheduleDay() {
+  const nextScheduleContainer = document.querySelector("#next-schedule")
+  
+  if(nextScheduleContainer){
+    const today = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    const schedules = await getAllSchedule().then( res => res.schedules )
+    const todaySchedules = schedules.filter( schedule => {
+      const scheduleDate = new Date(schedule.date).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(",")[0]
+      return scheduleDate == today.split(",")[0]
+    })
+    console.log(schedules)
+    console.log(todaySchedules)
+
+    renderNextSchedules(todaySchedules)
+  }
+}
+
 /* Abertura do site */
 
 // atualiza preenchendo os campos da página que tá aberta
@@ -303,7 +345,10 @@ document.addEventListener("DOMContentLoaded", function () {
     campoData.min = new Date().toLocaleDateString("sv-SE");
   }
 
+  // Call dynamics datas
   renderAvailableHours();
+  admScheduleDay();
+
   configurarFormularios();
   atualizarPagina();
 });

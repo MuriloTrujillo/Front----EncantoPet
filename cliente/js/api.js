@@ -10,7 +10,7 @@ export const createSchedule = async (data) => {
   });
 
   response = await response.json()
-  console.log("createSchedule", response );
+  // console.log("createSchedule", response );
   return response;
 };
 
@@ -23,7 +23,7 @@ export const listScheduleDay = async (day) => {
   });
 
   response = await response.json()
-  console.log("listScheduleDay", response );
+  // console.log("listScheduleDay", response );
   return response;
 };
 
@@ -39,7 +39,19 @@ export const login = async (email, password) => {
   });
 
   response = await response.json()
-  console.log("login", response );
+  // console.log("login", response );
   return response;
 };
 
+export const getAllSchedule = async () => {
+  let response = await fetch(`${API_URL}/api/schedule/list-all`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  response = await response.json()
+  // console.log("getAllSchedule", response );
+  return response;
+};
