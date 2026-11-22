@@ -82,7 +82,7 @@ const STATUS_RECORD = {pending: "Aguardando",confirmed: "Confirmado",completed: 
       const services = (schedule.servicos ?? [])
         .map(service => service.name)
         .join(" | ");
-
+      
       const petNameElement = document.createElement("b");
       petNameElement.textContent = petName;
 

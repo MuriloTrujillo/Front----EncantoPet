@@ -345,6 +345,7 @@ async function renderServiceOptions() {
       response.data.forEach( option => {
         const clone = serviceOption.cloneNode(true)
         clone.querySelector("#title").textContent = option.name
+        clone.querySelector("#option").value = option.name
         
         serviceContainer.appendChild(clone)
       })
