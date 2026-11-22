@@ -33,8 +33,14 @@
     </header>
 
     <!-- Dia ATUAL -->
-    <section class="hoje-card" aria-labelledby="hoje-titulo">
+    <section class="hoje-card" aria-labelledby="hoje-titulo" >
       <div class="hoje-data">
+        <div class="skip-date">
+          <button type="button" id="skip-date-anterior" aria-label="Anterior">‹</button>
+          <button type="button" id="skip-date-hoje" class="cal-hoje">Hoje</button>
+          <button type="button" id="skip-date-proximo" aria-label="Próximo">›</button>
+        </div>
+
         <span class="hoje-dia" id="hoje-dia"></span>
         <span class="hoje-sem" id="hoje-sem"></span>
         <span class="hoje-mes" id="hoje-mes"></span>
@@ -42,12 +48,20 @@
       </div>
       <div class="hoje-corpo">
         <h2 id="hoje-titulo">O que tem para hoje</h2>
-        <ul class="hoje-lista" id="hoje-lista"></ul>
+        <ul class="hoje-lista" id="hoje-lista">
+          <template id="next-schedule-adm-tamplate">
+            <li>
+              <span class="hora">09:00</span>
+              <span class="info"><b>Thor</b>Banho e tosa · Maria Souza</span>
+              <span class="status">Confirmado</span>
+            </li>
+          </template>
+        </ul>
       </div>
     </section>
 
     <!-- Calendário -->
-    <section class="calendario" aria-label="Calendário">
+    <!-- <section class="calendario" aria-label="Calendário">
       <div class="cal-topo">
         <div class="cal-nav">
           <button type="button" id="cal-anterior" aria-label="Anterior">‹</button>
@@ -67,14 +81,15 @@
       <div id="cal-corpo"></div>
 
       <div class="cal-detalhe" id="cal-detalhe" hidden></div>
-    </section>
+    </section> -->
 
-    <p class="nota">Agendamentos de exemplo. Depois eles serão ligados ao sistema de agendamento.</p>
+    <!-- <p class="nota">Agendamentos de exemplo. Depois eles serão ligados ao sistema de agendamento.</p> -->
 
   </main>
 
   <script src="../js/painel.js"></script>
-  <script src="../js/agenda.js"></script>
+  <script src="../js/agendaa.js"></script>
+  <script type="module" src="../js/schedules.js"></script>
 
 </body>
 </html>

@@ -14,7 +14,8 @@
 /* Dia atual */
 .hoje-card {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    /* grid-template-columns: 280px 1fr; */
+
     overflow: hidden;
     background: var(--cartao);
     border: 1px solid var(--borda);
@@ -137,6 +138,8 @@
     line-height: 1;
     transition: border-color 0.2s, transform 0.2s;
 }
+
+
 
 .cal-nav .cal-hoje {
     width: auto;
@@ -428,6 +431,48 @@
     border-radius: 50%;
     background: var(--roxo-claro);
 }
+
+
+
+/* #region Leonardo sousa */
+.skip-date {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.skip-date button {
+    font: inherit;
+    color: var(--texto);
+    
+}
+
+.skip-date .cal-hoje {
+    width: auto;
+    padding: 0 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.skip-date button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--borda);
+    border-radius: 50%;
+    background: var(--campo);
+    font-size: 20px;
+    line-height: 1;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.skip-date button:hover {
+    border-color: var(--laranja);
+    transform: translateY(-2px);
+}
+
+/* #endregion Leonardo sousa */
 
 /* Telas menores  */
 @media (max-width: 900px) {

@@ -303,8 +303,7 @@ function renderNextSchedules (data) {
     status.textContent = `${statusRecord[schedule.status]}`
     status.className = `status ${statusRecord[schedule.status].toLowerCase()}`
     nextScheduleContainer.appendChild(clone)
-  })
-  
+  }) 
 }
 
 async function admScheduleDay() {
