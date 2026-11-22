@@ -220,6 +220,39 @@ header {
     border-color: #6d28d9;
 }
 
+.Fundo input[type="number"]:hover {
+    border-color: #8b5cf6;
+}
+
+.Fundo input[type="number"]:focus {
+    outline: 3px solid rgba(139, 92, 246, 0.35);
+    border-color: #6d28d9;
+}
+
+.Fundo input[type="number"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e0e4eb;
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+input[type="number"] {
+    cursor: text;
+}
+
+.Fundo input[type="number"] {
+  background: var(--campo);
+  color: var(--texto);
+  border-color: var(--borda);
+  transition: border-color 0.2s;
+}
+
+.Fundo input[type="number"]::placeholder {
+  color: var(--texto-suave);
+  opacity: 0.7;
+}
+
 .fechar {
     position: absolute;
     right: 20px;

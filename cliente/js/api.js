@@ -55,3 +55,59 @@ export const getAllSchedule = async () => {
   // console.log("getAllSchedule", response );
   return response;
 };
+
+// SERVICES
+export const getAllServices = async () => {
+  let response = await fetch(`${API_URL}/api/service/list-all`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  response = await response.json()
+  // console.log("getAllServices", response );
+  return response;
+};
+
+export const createServices = async (name, value, duration) => {
+  let response = await fetch(`${API_URL}/api/service`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({name, value, duration})
+  });
+
+  response = await response.json()
+  // console.log("createServices", response );
+  return response;
+};
+
+export const updateServices = async (id, data) => {
+  let response = await fetch(`${API_URL}/api/service/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+
+  response = await response.json()
+  // console.log("updateServices", response );
+  return response;
+};
+
+
+export const deleteServices = async (id) => {
+  let response = await fetch(`${API_URL}/api/service/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  response = await response.json()
+  // console.log("deleteServices", response );
+  return response;
+};
