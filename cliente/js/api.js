@@ -1,31 +1,5 @@
 const API_URL = "http://localhost:3000";
 
-export async function getClientes() {
-  const response = await fetch(`${API_URL}/clientes`);
-
-  if (!response.ok) {
-    throw new Error("Erro ao buscar clientes");
-  }
-
-  return response.json();
-}
-
-export async function criarCliente(cliente) {
-  const response = await fetch(`${API_URL}/clientes`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(cliente),
-  });
-
-  if (!response.ok) {
-    throw new Error("Erro ao criar cliente");
-  }
-
-  return response.json();
-}
-
 export const createSchedule = async (data) => {
   let response = await fetch(`${API_URL}/api/schedule`, {
     method: "POST",
@@ -52,3 +26,4 @@ export const listScheduleDay = async (day) => {
   console.log("listScheduleDay", response );
   return response;
 };
+
