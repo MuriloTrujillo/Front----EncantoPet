@@ -1,6 +1,8 @@
 
 /*  Memória  */
 
+import { createSchedule } from "./api.js";
+
 //  os nomes das "gavetinhas" onde é armazenado o isso ai
 var GAVETA_TEMA = "encanto-tema";
 var GAVETA_DADOS = "encanto-agendamento";
@@ -139,8 +141,7 @@ function configurarFormularios() {
         return;
       }
 
-  // na pg de serviços, pelo menos um tem que ser selecionado
-
+      // na pg de serviços, pelo menos um tem que ser selecionado
       var lista = formulario.querySelector(".lista-servicos");
       if (lista && !lista.querySelector("input:checked")) {
         mostrarAviso(formulario, "Escolha pelo menos um serviço para continuar.");
@@ -148,7 +149,14 @@ function configurarFormularios() {
       }
 
       guardarDados(lerFormulario(formulario));
-      window.location.href = proxima;   // abre na mesma aba
+
+      if(formulario.getAttribute("data-proxima") == "confirmacao.html"){
+        const data = sessionStorage.getItem("encanto-agendamento")
+        const response = createSchedule(data)
+      } else {
+        window.location.href = proxima;   // abre na mesma aba
+      }
+
     });
   });
 }
