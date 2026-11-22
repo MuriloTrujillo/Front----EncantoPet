@@ -28,6 +28,7 @@
   </header>
 
   <!-- Barra de Progresso -->
+   
   <div class="conteiner-etapas">
     <div class="etapa-item concluida">
       <div class="icone-etapa">👤</div>
@@ -61,8 +62,15 @@
       <h2 class="titulo">Serviço</h2>
       <p class="subtitulo">Etapa 3 de 5 · escolha um ou mais</p>
 
-      <div class="lista-servicos">
-
+      <div class="lista-servicos" id="service-container">
+        <!-- TODO: Tornar dinamico -->
+        <template id="service-option-component">
+          <label class="opcao">
+            <input id="option" type="checkbox" name="servicos" value="Banho e tosa">
+            <span class="icone" id="icon"></span>
+            <span id="title">Banho e tosa</span>
+          </label>
+         </template>
         <label class="opcao">
           <input type="checkbox" name="servicos" value="Banho e tosa">
           <span class="icone">✂️</span>

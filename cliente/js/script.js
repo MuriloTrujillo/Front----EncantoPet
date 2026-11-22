@@ -1,6 +1,6 @@
 /*  Memória  */
 
-import { createSchedule, listScheduleDay, login, getAllSchedule } from "./api.js";
+import { createSchedule, listScheduleDay, login, getAllSchedule, getAllServices } from "./api.js";
 
 //  os nomes (chaves) usados no localStorage e no sessionStorage, onde as informações ficam guardadas
 var GAVETA_TEMA = "encanto-tema";
@@ -316,10 +316,39 @@ async function admScheduleDay() {
       const scheduleDate = new Date(schedule.date).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }).split(",")[0]
       return scheduleDate == today.split(",")[0]
     })
-    console.log(schedules)
-    console.log(todaySchedules)
-
     renderNextSchedules(todaySchedules)
+  }
+}
+
+async function renderServiceOptions() {
+  const serviceContainer = document.querySelector("#service-container")
+  const serviceOption = document.querySelector("#service-option-component")?.content
+  
+  if(serviceContainer && serviceOption){
+    serviceContainer.replaceChildren()
+    const response = await getAllServices()
+    if(response.erro){
+      return alert(`Erro ao requisitar serviços - ${response.message}`)
+    }
+
+    console.log(response.data.length);
+    
+
+    if(response.data.length == 0){
+      const clone = serviceOption.cloneNode(true)
+      clone.querySelector("#title").textContent = "Nenhum serviço encontrado"
+      clone.querySelector("#option").disabled = true
+      serviceContainer.appendChild(clone)
+    }
+
+    if(response.data.length > 0){
+      response.data.forEach( option => {
+        const clone = serviceOption.cloneNode(true)
+        clone.querySelector("#title").textContent = option.name
+        
+        serviceContainer.appendChild(clone)
+      })
+    }
   }
 }
 
@@ -347,6 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Call dynamics datas
   renderAvailableHours();
   admScheduleDay();
+  renderServiceOptions();
 
   configurarFormularios();
   atualizarPagina();
