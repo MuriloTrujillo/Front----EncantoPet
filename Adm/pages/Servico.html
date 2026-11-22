@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços Adm</title>
+  
+<link rel="stylesheet" href="../css/cssADM.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="../index.html">
+        <img src="../../cliente/assets/images/logo.jpeg" alt="Logo do Encanto Pet">
+        Encanto <b>Pet</b>
+    </a>
+  </header>
+  <main class="pagina">
+
+        <header class="cabecalho">
+            <div>
+                <h1>Gerenciamento de serviços</h1>
+                <p>Serviços ativos ficam disponíveis para agendamento pelos clientes.</p>
+            </div>
+
+            <button class="botao-novoServico" onclick="novoServico()">
+                Novo serviço
+            </button>
+        </header>
+
+        <section class="lista-servicos" id="lista-servicos">
+
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Banho</h2>
+                <p>45 min · R$ 60,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Banho e tosa</h2>
+                <p>1h 30 · R$ 110,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Somente tosa</h2>
+                <p>1h · R$ 80,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+            
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Tosa Higiênica</h2>
+                <p>55 min · R$ 80,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Hidratação</h2>
+                <p>30 min · R$ 150,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+            
+            <article class="servico">
+                <div class="parte-superior">
+                    <div class="icone">✂</div>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <h2>Corte de Unhas</h2>
+                <p>15 min · R$ 30,00</p>
+
+                <div class="acoes">
+                    <button class="editar" onclick="editarServico(this)">
+                        ✎ Editar
+                    </button>
+
+                    <button class="excluir" onclick="excluirServico(this)">
+                        X
+                    </button>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- NOVO SERVIÇO -->
+
+    <div class="NovaJanela" id="Janela">
+
+        <section class="Fundo">
+
+            <button class="fechar" onclick="fecharJanela()">×</button>
+
+            <h2 id="titulo-servico">Novo serviço</h2>
+
+            <p>Informe o nome, a duração e o valor do serviço.</p>
+
+            <form id="form-servico">
+
+                <label for="nome">Nome do serviço</label>
+
+                <input type="text" id="nome"
+                       placeholder="Ex.: Banho e tosa" required>
+
+                <div class="campos-lado">
+
+                    <div>
+                        <label for="duracao">Duração</label>
+
+                        <input type="text" id="duracao"
+                               placeholder="Ex.: 1h 30" required>
+                    </div>
+
+                    <div>
+                        <label for="valor">Valor</label>
+
+                        <input type="text" id="valor"
+                               placeholder="Ex.: R$ 110,00" required>
+                    </div>
+
+                </div>
+
+                <div class="disponibilidade">
+
+                    <label for="disponivel">
+                        Disponível para agendamento
+                    </label>
+
+                    <label class="MineBotao">
+                        <input type="checkbox" id="disponivel" checked>
+                        <span></span>
+                    </label>
+
+                </div>
+
+                <div class="botoes-modal">
+
+                    <button type="button" class="cancelar"
+                            onclick="fecharJanela()">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="salvar">
+                        Salvar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+  <script src="../js/Gerenciamento.js"></script>
+
+  
+
+
+  <!-- Botão de tema claro/escuro.........cssADM (Murilo) -->
+ 
+  <div class="acoes-topo">
+    <a class="botao-topo" href="painel.html">← Painel</a>
+    <button type="button" class="botao-tema" data-botao-tema title="Trocar entre modo claro e escuro" aria-label="Trocar entre modo claro e escuro">🌓</button>
+  </div>
+
+  <!-------------------------------------------------------------------->
+
+</body>
+</html>

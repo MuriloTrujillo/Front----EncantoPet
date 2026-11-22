@@ -2,7 +2,7 @@
 
 import { createSchedule, listScheduleDay } from "./api.js";
 
-//  os nomes das "gavetinhas" onde é armazenado o isso ai
+//  os nomes (chaves) usados no localStorage e no sessionStorage, onde as informações ficam guardadas
 var GAVETA_TEMA = "encanto-tema";
 var GAVETA_DADOS = "encanto-agendamento";
 
@@ -19,7 +19,7 @@ function pegar(tipo, nome) {
   }
 }
 
-// armazena algo lá na gavetina de dados
+// armazena algo no storage (localStorage ou sessionStorage)
 function guardar(tipo, nome, valor) {
   try {
     window[tipo].setItem(nome, valor);
@@ -165,6 +165,9 @@ function configurarFormularios() {
 
 /* CONFIRMAÇÃO  */
 
+// observação com mais letras que isso (ou com enter) aparece num cardzinho embaixo do título
+var LIMITE_OBSERVACAO = 20;
+
 function formatarData(texto) {
   var partes = texto.split("-");
   return partes[2] + "/" + partes[1] + "/" + partes[0];
@@ -177,6 +180,9 @@ function preencherResumo() {
     var nome = item.getAttribute("data-resumo");
     var valor = dados[nome];
 
+    if (typeof valor === "string") {
+      valor = valor.trim();   // só espaços ou enter também conta como vazio
+    }
     if (Array.isArray(valor)) {
       valor = valor.join(", "); // serviços ="Banho, Hidratação"
     }
@@ -184,7 +190,14 @@ function preencherResumo() {
       valor = formatarData(valor);
     }
 
-    item.textContent = valor || "—"; // se não tiver nada, mostra um traço
+    // se não tiver nada, mostra o texto do data-vazio (ex.: "Nenhuma observação presente") ou um traço
+    item.textContent = valor || item.getAttribute("data-vazio") || "—";
+
+    // observação grande: avisa o CSS (pela classe) pra mostrar num card
+    if (nome === "observacoes") {
+      var grande = valor && (valor.length > LIMITE_OBSERVACAO || valor.indexOf("\n") !== -1);
+      item.parentElement.classList.toggle("observacao-grande", !!grande);
+    }
   });
 }
 
