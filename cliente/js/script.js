@@ -342,7 +342,7 @@ async function renderServiceOptions() {
     }
 
     if(response.data.length > 0){
-      response.data.forEach( option => {
+      response.data.filter( service => service.isActive).forEach( option => {
         const clone = serviceOption.cloneNode(true)
         clone.querySelector("#title").textContent = option.name
         clone.querySelector("#option").value = option.name
