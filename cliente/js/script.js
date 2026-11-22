@@ -1,6 +1,6 @@
 /*  Memória  */
 
-import { createSchedule, listScheduleDay } from "./api.js";
+import { createSchedule, listScheduleDay, login } from "./api.js";
 
 //  os nomes (chaves) usados no localStorage e no sessionStorage, onde as informações ficam guardadas
 var GAVETA_TEMA = "encanto-tema";
@@ -129,8 +129,21 @@ function configurarFormularios() {
     formulario.addEventListener("submit", async function (evento) {
       evento.preventDefault(); // não deixa a página recarregar sozinha
 
-      var proxima = formulario.getAttribute("data-proxima");
+      if(formulario.id == "form-login"){
+        const email = formulario.querySelector("#adm-email").value;
+        const password = formulario.querySelector("#adm-senha").value;
 
+        const response = await login(email, password)
+
+        if(response.error){
+          return mostrarAviso(formulario, response.message.split(" - ")[2])}
+        
+        return window.location.href = "../../Adm/pages/painel.html"
+      
+        }
+
+      // Trata os demais formularios
+      var proxima = formulario.getAttribute("data-proxima");
       // formulário sem data-proxima (o do ADM) só mostra o aviso
       if (!proxima) {
         mostrarAviso(formulario, formulario.getAttribute("data-aviso"));
@@ -146,8 +159,9 @@ function configurarFormularios() {
         );
         return;
       }
-
       guardarDados(lerFormulario(formulario));
+
+      
 
       if (formulario.getAttribute("data-proxima") == "confirmacao.html") {
         const data = sessionStorage.getItem("encanto-agendamento");

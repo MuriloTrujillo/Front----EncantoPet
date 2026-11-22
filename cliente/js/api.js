@@ -27,3 +27,19 @@ export const listScheduleDay = async (day) => {
   return response;
 };
 
+// ADMIN
+
+export const login = async (email, password) => {
+  let response = await fetch(`${API_URL}/api/user/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email: email, password: password}),
+  });
+
+  response = await response.json()
+  console.log("login", response );
+  return response;
+};
+
