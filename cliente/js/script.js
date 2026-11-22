@@ -1,7 +1,6 @@
-
 /*  Memória  */
 
-import { createSchedule } from "./api.js";
+import { createSchedule, listScheduleDay } from "./api.js";
 
 //  os nomes das "gavetinhas" onde é armazenado o isso ai
 var GAVETA_TEMA = "encanto-tema";
@@ -11,7 +10,7 @@ var GAVETA_DADOS = "encanto-agendamento";
 
 var memoria = {};
 
-// esse aqui pega algo q eu guardei. "tipo" é armazenamento local 
+// esse aqui pega algo q eu guardei. "tipo" é armazenamento local
 function pegar(tipo, nome) {
   try {
     return window[tipo].getItem(nome);
@@ -29,7 +28,6 @@ function guardar(tipo, nome, valor) {
   }
 }
 
-
 // TEMA CLARO / ESCURO 🌓
 
 // coloca o tema lá no <html>
@@ -43,14 +41,12 @@ var temaSalvo = pegar("localStorage", GAVETA_TEMA);
 var sistemaEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
 aplicarTema(temaSalvo || (sistemaEscuro ? "escuro" : "claro"));
 
-
 function trocarTema() {
   var atual = document.documentElement.getAttribute("data-tema");
   var novo = atual === "escuro" ? "claro" : "escuro";
   aplicarTema(novo);
   guardar("localStorage", GAVETA_TEMA, novo);
 }
-
 
 /* DADOS DAS ETAPAS */
 
@@ -88,7 +84,7 @@ function lerFormulario(formulario) {
         dados[campo.name] = campo.value;
       }
     } else {
-      // o resto (nome, telefone, data...) 
+      // o resto (nome, telefone, data...)
       dados[campo.name] = campo.value;
     }
   });
@@ -116,7 +112,7 @@ function preencherFormulario(formulario) {
   });
 }
 
-// o aviso embaixo do formulário 
+// o aviso embaixo do formulário
 function mostrarAviso(formulario, mensagem) {
   var aviso = formulario.querySelector(".aviso");
   if (aviso) {
@@ -130,8 +126,8 @@ function mostrarAviso(formulario, mensagem) {
 
 function configurarFormularios() {
   document.querySelectorAll("form").forEach(function (formulario) {
-    formulario.addEventListener("submit", function (evento) {
-      evento.preventDefault();   // não deixa a página recarregar sozinha
+    formulario.addEventListener("submit", async function (evento) {
+      evento.preventDefault(); // não deixa a página recarregar sozinha
 
       var proxima = formulario.getAttribute("data-proxima");
 
@@ -144,23 +140,28 @@ function configurarFormularios() {
       // na pg de serviços, pelo menos um tem que ser selecionado
       var lista = formulario.querySelector(".lista-servicos");
       if (lista && !lista.querySelector("input:checked")) {
-        mostrarAviso(formulario, "Escolha pelo menos um serviço para continuar.");
+        mostrarAviso(
+          formulario,
+          "Escolha pelo menos um serviço para continuar.",
+        );
         return;
       }
 
       guardarDados(lerFormulario(formulario));
 
-      if(formulario.getAttribute("data-proxima") == "confirmacao.html"){
-        const data = sessionStorage.getItem("encanto-agendamento")
-        const response = createSchedule(data)
-      } else {
-        window.location.href = proxima;   // abre na mesma aba
-      }
+      if (formulario.getAttribute("data-proxima") == "confirmacao.html") {
+        const data = sessionStorage.getItem("encanto-agendamento");
+        const response = await createSchedule(data);
 
+        if( !response.error ){
+          window.location.href = proxima;
+        }
+      } else {
+        window.location.href = proxima; // abre na mesma aba
+      }
     });
   });
 }
-
 
 /* CONFIRMAÇÃO  */
 
@@ -177,16 +178,82 @@ function preencherResumo() {
     var valor = dados[nome];
 
     if (Array.isArray(valor)) {
-      valor = valor.join(", ");   // serviços ="Banho, Hidratação"
+      valor = valor.join(", "); // serviços ="Banho, Hidratação"
     }
     if (nome === "data" && valor) {
       valor = formatarData(valor);
     }
 
-    item.textContent = valor || "—";   // se não tiver nada, mostra um traço
+    item.textContent = valor || "—"; // se não tiver nada, mostra um traço
   });
 }
 
+// Horarios de agendamento dinamicos
+async function renderAvailableHours() {
+  const hoursOptions = [
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+  ];
+  const hoursContainer = document.querySelector(".lista-horarios");
+  const hourComponent = document.querySelector(".horario");
+
+  if (!hoursContainer) {
+    return;
+  }
+
+  // Selected date
+  let currentSelectedDay = JSON.parse(
+    sessionStorage.getItem("encanto-agendamento"),
+  ).data;
+  let unavailableHours = await listScheduleDay(currentSelectedDay);
+
+  document
+    .querySelector("#schedule-date")
+    .addEventListener("change", async (e) => {
+      console.log(e.target.valueAsDate?.toISOString());
+      unavailableHours = await listScheduleDay(
+        e.target.valueAsDate?.toISOString(),
+      );
+
+      hoursContainer.replaceChildren();
+      hoursOptions.forEach((hoursOption) => {
+        const clone = hourComponent.cloneNode(true);
+        clone.querySelector("input").value = hoursOption;
+        clone.querySelector("span").textContent = hoursOption;
+
+        unavailableHours.schedules.map((scheduleDay) => {
+          if (hoursOption == scheduleDay.hour) {
+            clone.style = "opacity: 50%; pointer-events: none";
+            return hoursContainer.appendChild(clone);
+          }
+        });
+
+        hoursContainer.appendChild(clone);
+      });
+    });
+
+  hoursContainer.replaceChildren();
+  hoursOptions.forEach((hoursOption) => {
+    const clone = hourComponent.cloneNode(true);
+    clone.querySelector("input").value = hoursOption;
+    clone.querySelector("span").textContent = hoursOption;
+
+    unavailableHours.schedules.map((scheduleDay) => {
+      if (hoursOption == scheduleDay.hour) {
+        clone.style = "opacity: 50%; pointer-events: none";
+        return hoursContainer.appendChild(clone);
+      }
+    });
+
+    hoursContainer.appendChild(clone);
+  });
+}
 
 /* Abertura do site */
 
@@ -209,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
     campoData.min = new Date().toLocaleDateString("sv-SE");
   }
 
+  renderAvailableHours();
   configurarFormularios();
   atualizarPagina();
 });
