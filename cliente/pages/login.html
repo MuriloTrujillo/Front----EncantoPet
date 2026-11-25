@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="../css/style.css">
   <script type="module" src="../js/script.js"></script>
   <script type="module" src="../js/api.js"></script>
+  <script src="../js/googleOAuth.js"></script>
+  <script src="https://accounts.google.com/gsi/client?hl=pt-BR"  async>
+</script>
 </head>
 <body>
 
@@ -37,7 +40,18 @@
       <p>Entre na sua conta para continuar</p>
 
       <!-- Cliente: faz acesso com a conta do Google dele -->
-      <a class="botao-google" href="dados-pessoais.html">Entrar com Google</a>
+      
+      <div id="g_id_onload" data-client_id="136879532681-fs42hk8cj9a01il4bu9kgbsk2d2m5jtf.apps.googleusercontent.com" data-callback="receberLoginGoogle"
+      data-auto_prompt="false" data-ux_mode="popup">
+    </div>
+    
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signin_with"
+    data-shape="rectangular" data-locale="pt-BR">
+        <!-- <a class="botao-google" href="dados-pessoais.html">Entrar com Google</a> -->  
+      </div>
+      
+      <p id="google-status" role="status"></p>
+
       <p class="login-dica">Primeiro acesso? É só entrar com o Google, sua conta é criada na hora.</p>
 
       <!-- Adm: e-mail e senha -->

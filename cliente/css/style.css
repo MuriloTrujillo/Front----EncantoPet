@@ -204,6 +204,10 @@ nav a:hover {
   font-weight: 900;
 }
 
+.g_id_signin{
+  max-width: 250px;
+}
+
 /* Animação ao passar o mouse nos botões */
 .botao-google,
 .botao,
