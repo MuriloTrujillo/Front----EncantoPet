@@ -2,12 +2,16 @@ import { API_URL } from "../../config.js";
 
 
 export const createSchedule = async (data) => {
+  let payload = JSON.parse(data)
+  const googleId = sessionStorage.getItem("gId")
+  
+  payload['gId'] = googleId;
   let response = await fetch(`${API_URL}/api/schedule`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: data,
+    body: JSON.stringify(payload),
   });
 
   response = await response.json()
